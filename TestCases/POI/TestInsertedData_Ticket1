@@ -1,0 +1,74 @@
+
+SELECT LT.TAGID , t.tagname
+FROM POI.LOCATIONTAG LT 
+LEFT JOIN POI.LOCATIONS LOC 
+ON LT.LOCATIONID = LOC.LOCATIONID
+left join poi.tag t
+on lt.tagid = t.tagid
+WHERE SOURCELOCATIONID = '222-222@5v9-8qv-cwk';
+
+
+
+SELECT * FROM poi.OperationHour ;
+
+select * from poi.locations
+where locationid = 157645;
+
+select * from poi.locations
+where locationName = '007 Towing';
+--169346	007 Towing	33.679480	-111.975801	185883	32	2025-08-23 20:32:20.8711604	Vanja\Vanja Mlinar	NULL	NULL	223-24t@5zb-x59-5cq
+
+
+select * from poi.sourcedata
+where locationName = '007 Towing'
+/*ID	ParentID	Brand	BrandID	TopCategory	SubCategory	CategoryTags	PostalCode	LocationName	Latitude	Longitude	CountryCode	City	Region	OperationHours	GeometryType	Polygon_WKT
+222-222@8ts-zg3-75z	NULL	NULL	NULL	Support Activities for Road Transportation	Motor Vehicle Towing	Towing	85026	007 Towing	33.450078	-111.975934	US	Phoenix	AZ	NULL	POLYGON	POLYGON ((-111.97520553599998 33.44896634100007, -111.97712944399996 33.44919564200006, -111.97712847999998 33.449412051000024, -111.97707974699995 33.449411902000065, -111.97707708399997 33.45000961100004, -111.97681717699999 33.45000881900006, -111.97681672799996 33.45010955600003, -111.97664616499998 33.450109035000025, -111.976644997 33.45037095300006, -111.97605208299996 33.450369142000056, -111.97605181299997 33.45042958500005, -111.97519086899996 33.450426951000054, -111.97519369799994 33.44979566300003, -111.97520181899995 33.44979568800005, -111.97520553599998 33.44896634100007))
+223-24t@5zb-x59-5cq	22v-222@5zb-x59-52k	NULL	NULL	Support Activities for Road Transportation	Motor Vehicle Towing	Towing	85050	007 Towing	33.67948	-111.975801	US	Phoenix	AZ	NULL	POLYGON	POLYGON ((-111.97604947532739 33.67972602950504, -111.97569542373742 33.67970817349275, -111.97571151699151 33.67932426833136, -111.97607629741753 33.679333196377826, -111.97604947532739 33.67972602950504))
+22c-227@5zb-xbf-6kz	NULL	NULL	NULL	Support Activities for Road Transportation	Motor Vehicle Towing	Towing	85017	007 Towing	33.480951	-112.132323	US	Phoenix	AZ	NULL	POLYGON	POLYGON ((-112.13208164399998 33.48103920700004, -112.13208310799996 33.48093176400005, -112.13217247999995 33.48093259500007, -112.13217476699998 33.48076471600007, -112.13236976099995 33.48076653100003, -112.13236601199998 33.48104185200003, -112.13208164399998 33.48103920700004))
+*/
+
+
+
+SELECT 
+   *
+FROM poi.SourceData s
+JOIN poi.Locations l 
+    ON l.LocationName = s.LocationName
+    AND l.locationName = '007 Towing'    
+JOIN poi.PostalCode pc 
+    ON pc.PostalCodeID = l.PostalCodeID 
+    AND Pc.postalcode = s.PostalCode
+LEFT JOIN poi.SubCategory sc 
+    ON sc.SubCategoryName = s.SubCategory
+LEFT JOIN poi.Category c
+    ON c.CategoryID = sc.CategoryID
+   AND c.CategoryName = s.TopCategory
+       order by locationid;
+SELECT * FROM POI.poiLOCATIONS
+WHERE LOCATIONID = 157646;
+
+SELECT * FROM POI.LOCATIONS
+WHERE LOCATIONID = 157646;
+
+
+
+DECLARE @json NVARCHAR(MAX) = N'{
+    "RegionCode": "AZ",
+    "POICategory": "Religious Organizations"
+}';
+
+EXEC poi.GetPOIs_JSON @SearchCriteria = @json;
+
+
+DECLARE @json NVARCHAR(MAX) = N'
+{
+    "CountryCode": "US",
+    "RegionCode": "AZ",
+    "CityName": "Phoenix",
+    "CenterLat": 33.636371,
+    "CenterLon": -112.150129,
+    "RadiusMeters": 200
+
+}';
+
+EXEC poi.GetPOIs_JSON @SearchCriteria = @json;
