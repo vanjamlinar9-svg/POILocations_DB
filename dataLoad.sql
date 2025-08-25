@@ -1,3 +1,15 @@
+BULK INSERT poi.SourceData
+FROM 'C:\Users\Vanja Mlinar\Downloads\SourceData.tsv'
+WITH (
+    FIRSTROW = 2,
+    FIELDTERMINATOR = '\t',
+    ROWTERMINATOR = '\n',
+    CODEPAGE = '65001',
+    KEEPNULLS
+);
+
+--
+
 INSERT INTO poi.Country (CountryCode, CountryName)
 VALUES 
 ('US', 'United States of America'),
