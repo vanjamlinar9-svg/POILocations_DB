@@ -4,12 +4,13 @@ locations, categories, tags, postal codes and geometries.
 
 Repository structure:
 
-schema/ - schema creation scripts
+schema/ - schema creation scripts and erd
 tables/ - table definitions
 views/ - views definition
 procedures/ - stored procedures/packages
 testCases/ - queries for testing
-dataload.sql - initial load of data
+dataload.sql - initial load of data from SourceData.tsv
+dbBackup/ - database backup
 
 Setup steps
 To Create a new database execute following script:
@@ -27,3 +28,5 @@ In order to create db objects run scripts in the following order:
     tables/*
     views/*
     procedures/*
+Notes: 
+    Database is compatible with MS SQL Server 2019- v15
