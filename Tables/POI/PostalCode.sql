@@ -1,0 +1,12 @@
+CREATE TABLE poi.PostalCode (
+    PostalCodeID INT IDENTITY(1,1) PRIMARY KEY,
+    PostalCode VARCHAR(20) NOT NULL,
+    CityID INT NOT NULL,
+    CONSTRAINT UQ_PostalCode UNIQUE (PostalCode, CityID),
+    FOREIGN KEY (CityID) REFERENCES poi.City(CityID),
+    CreatedOn DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+    CreatedBy VARCHAR(100) NOT NULL DEFAULT SUSER_SNAME(),
+    UpdatedOn DATETIME2 NULL,
+    UpdatedBy VARCHAR(100) NULL
+);
+CREATE NONCLUSTERED INDEX IX_PostalCode_CityID ON poi.PostalCode (CityID);
