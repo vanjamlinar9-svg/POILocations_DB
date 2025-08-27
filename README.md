@@ -1,16 +1,16 @@
 # POILocations_DB
 This repository contains the SQL Server database model for managing Points of Interest (POI) including 
-locations, categories, tags, postal codes and geometries.
+locations, categories, tags, postal codes and geometries - within Free City Guide software.
 
 Repository structure:
 
-schema/ - schema creation scripts and erd
-tables/ - table definitions
-views/ - views definition
-procedures/ - stored procedures/packages
+1_schema/ - schema creation scripts and erd
+2_tables/ - table definitions
+3_views/ - views definition
+4_procedures/ - stored procedures/packages
+5_dbBackup/ - database backup
 testCases/ - queries for testing
 dataload.sql - initial load of data from SourceData.tsv
-dbBackup/ - database backup
 
 Setup steps
 To Create a new database execute following script:
