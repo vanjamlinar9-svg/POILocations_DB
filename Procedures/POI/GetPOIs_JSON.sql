@@ -55,7 +55,7 @@ BEGIN
           AND (@RegionCode IS NULL OR  UPPER(vd.RegionCode) = UPPER(@RegionCode))
           AND (@CityName IS NULL OR  UPPER(vd.CityName) LIKE '%' + UPPER(@CityName) + '%')
           AND (@POICategory IS NULL OR  UPPER(vd.CategoryName) LIKE '%' + UPPER(@POICategory) + '%')
-          AND (@POIName IS NULL OR  UPPER(p.POIName) LIKE '%' + UPPER(@POIName) + '%')
+          AND (@POIName IS NULL OR  UPPER(vd.LocationName) LIKE '%' + UPPER(@POIName) + '%')
           AND (
                 @PolygonWKT IS NULL
                 OR p.PolygonGeom.STIntersects(geometry::STGeomFromText(@PolygonWKT, 4326)) = 1
