@@ -4,11 +4,11 @@ locations, categories, tags, postal codes and geometries - within Free City Guid
 
 Repository structure:
 
-1_schema/ - schema creation scripts and erd
-2_tables/ - table definitions
-3_views/ - views definition
-4_procedures/ - stored procedures/packages
-5_dbBackup/ - database backup
+schema/ - schema creation scripts and erd
+tables/ - table definitions
+views/ - views definition
+procedures/ - stored procedures/packages
+dbBackup/ - database backup
 testCases/ - queries for testing
 dataload.sql - initial load of data from SourceData.tsv
 
