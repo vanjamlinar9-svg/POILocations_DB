@@ -6,15 +6,15 @@ BEGIN
 
     BEGIN TRY
     
-        DECLARE @CountryCode VARCHAR(10),
-                @RegionCode VARCHAR(10),
-                @CityName VARCHAR(100),
+        DECLARE @CountryCode NVARCHAR(10),
+                @RegionCode NVARCHAR(10),
+                @CityName NVARCHAR(100),
                 @CenterLat FLOAT,
                 @CenterLon FLOAT,
                 @RadiusMeters FLOAT,
                 @PolygonWKT NVARCHAR(MAX),
-                @POICategory VARCHAR(100),
-                @POIName VARCHAR(255);
+                @POICategory NVARCHAR(100),
+                @POIName NVARCHAR(255);
 
         SELECT 
             @CountryCode = JSON_VALUE(@SearchCriteria, '$.CountryCode'),
@@ -51,11 +51,11 @@ BEGIN
                 ELSE NULL
             END AS DistanceToCenter
         ) d
-        WHERE (@CountryCode IS NULL OR vd.CountryCode = @CountryCode)
-          AND (@RegionCode IS NULL OR vd.RegionCode = @RegionCode)
-          AND (@CityName IS NULL OR vd.CityName LIKE '%' + @CityName + '%')
-          AND (@POICategory IS NULL OR vd.CategoryName LIKE '%' + @POICategory + '%')
-          AND (@POIName IS NULL OR p.POIName LIKE '%' + @POIName + '%')
+        WHERE (@CountryCode IS NULL OR  UPPER(vd.CountryCode) = UPPER(@CountryCode))
+          AND (@RegionCode IS NULL OR  UPPER(vd.RegionCode) = UPPER(@RegionCode))
+          AND (@CityName IS NULL OR  UPPER(vd.CityName) LIKE '%' + UPPER(@CityName) + '%')
+          AND (@POICategory IS NULL OR  UPPER(vd.CategoryName) LIKE '%' + UPPER(@POICategory) + '%')
+          AND (@POIName IS NULL OR  UPPER(p.POIName) LIKE '%' + UPPER(@POIName) + '%')
           AND (
                 @PolygonWKT IS NULL
                 OR p.PolygonGeom.STIntersects(geometry::STGeomFromText(@PolygonWKT, 4326)) = 1
