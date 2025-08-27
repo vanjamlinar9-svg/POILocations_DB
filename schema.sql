@@ -49,6 +49,7 @@ CREATE TABLE poi.Region (
     UpdatedOn DATETIME2 NULL,
     UpdatedBy VARCHAR(100) NULL
 );
+CREATE NONCLUSTERED INDEX IX_Region_CountryID ON poi.Region (CountryID);
 
 CREATE TABLE poi.City (
     CityID INT IDENTITY(1,1) PRIMARY KEY,
@@ -61,6 +62,7 @@ CREATE TABLE poi.City (
     UpdatedOn DATETIME2 NULL,
     UpdatedBy VARCHAR(100) NULL
 );
+CREATE NONCLUSTERED INDEX IX_City_RegionID   ON poi.City (RegionID);
 
 CREATE TABLE poi.PostalCode (
     PostalCodeID INT IDENTITY(1,1) PRIMARY KEY,
@@ -73,7 +75,7 @@ CREATE TABLE poi.PostalCode (
     UpdatedOn DATETIME2 NULL,
     UpdatedBy VARCHAR(100) NULL
 );
-
+CREATE NONCLUSTERED INDEX IX_PostalCode_CityID ON poi.PostalCode (CityID);
 
 CREATE TABLE poi.Category (
     CategoryID INT IDENTITY(1,1) PRIMARY KEY,
@@ -125,6 +127,9 @@ CREATE TABLE poi.Locations (
     UpdatedOn DATETIME2 NULL,
     UpdatedBy VARCHAR(100) NULL
 );
+CREATE NONCLUSTERED INDEX IX_Locations_PostalCodeID ON poi.Locations (PostalCodeID);
+CREATE NONCLUSTERED INDEX IX_Locations_CategoryID   ON poi.Locations (CategoryID);
+CREATE NONCLUSTERED INDEX IX_Locations_SubCategoryID ON poi.Locations (SubCategoryID);
 
 CREATE TABLE poi.LocationTag (
     LocationTagID INT IDENTITY(1,1) PRIMARY KEY,
@@ -138,6 +143,8 @@ CREATE TABLE poi.LocationTag (
     UpdatedOn DATETIME2 NULL,
     UpdatedBy VARCHAR(100) NULL
 );
+CREATE NONCLUSTERED INDEX IX_LocationTag_LocationID ON poi.LocationTag (LocationID);
+CREATE NONCLUSTERED INDEX IX_LocationTag_TagID      ON poi.LocationTag (TagID);
 
 CREATE TABLE poi.OperationHour (
     OperationHourID INT IDENTITY(1,1) PRIMARY KEY,
@@ -151,6 +158,7 @@ CREATE TABLE poi.OperationHour (
     UpdatedOn DATETIME2 NULL,
     UpdatedBy VARCHAR(100) NULL
 );
+CREATE NONCLUSTERED INDEX IX_OperationHour_LocationID ON poi.OperationHour (LocationID);
 
 CREATE TABLE poi.POILocations (
     POILocationID INT IDENTITY(1,1) PRIMARY KEY,
@@ -167,6 +175,7 @@ CREATE TABLE poi.POILocations (
     UpdatedOn DATETIME2 NULL,
     UpdatedBy VARCHAR(100) NULL
 );
+CREATE NONCLUSTERED INDEX IX_POILocations_LocationID ON poi.POILocations (LocationID);
 
 -- views
 CREATE OR ALTER VIEW poi.vw_LocationsDetails AS
@@ -439,3 +448,4 @@ BEGIN
 END;
 
 GO
+
