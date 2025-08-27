@@ -11,6 +11,21 @@ GO
 CREATE SCHEMA poi;
 GO
 
+/*
+DROP TABLE IF EXISTS poi.SourceData;
+DROP TABLE IF EXISTS poi.POILocations;
+DROP TABLE IF EXISTS poi.OperationHour;
+DROP TABLE IF EXISTS poi.LocationTag;
+DROP TABLE IF EXISTS poi.Locations;
+DROP TABLE IF EXISTS poi.Tag;
+DROP TABLE IF EXISTS poi.Subcategory;
+DROP TABLE IF EXISTS poi.Category;
+DROP TABLE IF EXISTS poi.PostalCode;
+DROP TABLE IF EXISTS poi.City;
+DROP TABLE IF EXISTS poi.Region;
+DROP TABLE IF EXISTS poi.Country;
+*/
+    
 -- tables
 CREATE TABLE poi.Country (
     CountryID INT IDENTITY(1,1) PRIMARY KEY,
@@ -422,4 +437,5 @@ BEGIN
         RAISERROR('Error in GetPOIs_JSON: %s', @ErrorSeverity, @ErrorState, @ErrorMessage);
     END CATCH
 END;
+
 GO
